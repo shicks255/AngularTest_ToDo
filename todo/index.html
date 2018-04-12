@@ -11,17 +11,22 @@
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
 
+    <!--This next script is the module loader-->
     <script>
+        // map of pathNames to paths
         var paths = {
             "rxjs/*": "node_modules/rxjs/bundles/Rx.min.js",
             "@angular/*": "node_modules/@angular/*"
         }
+        //object
         var packages = { "app": {} };
+        // list of angular built-in modules
         var angularModules = ["common", "compiler", "core", "forms", "platform-browser", "platform-browser-dynamic"];
         angularModules.forEach(function (pkg)
         {
             packages["@angular/" + pkg] = {main: "/bundles/" + pkg + ".umd.min.js"};
         });
+        console.log(packages);
         System.config({paths: paths, packages: packages});
         System.import("app/main").catch(function(err)
         {
