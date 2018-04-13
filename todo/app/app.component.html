@@ -5,3 +5,49 @@ with {{}} syntax-->
 
 
 <h3 class="bg-primary p-3">{{getName()}}'s To Do List</h3>
+
+<div class="m-1 mb-1">
+    <input class="form-control" #todoText/>
+    <button class="btn btn-primary m-1" (click)="addItem(todoText.value)">
+        Add
+    </button>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <th></th>
+        <th>Item</th>
+        <th>Done</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of getToDoItems();let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{item.action}}</td>
+            <td><input type="checkbox" [(ngModel)]="item.done"/></td>
+            <td [ngSwitch]="item.done">
+                <span *ngSwitchCase="true">Yes</span>
+                <span *ngSwitchCase="false">No</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 class="bg-primary p2">Done Items:</h2>
+<table class="table table-striped table-bordered">
+    <thead>
+    <th></th>
+    <th>Item</th>
+    <th>Not Done</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of getDoneItems();let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{item.action}}</td>
+        <td><input type="checkbox" [(ngModel)]="item.done"/></td>
+        <td [ngSwitch]="item.done">
+            <span *ngSwitchCase="true">Yes</span>
+            <span *ngSwitchCase="false">No</span>
+        </td>
+    </tr>
+    </tbody>
+</table>

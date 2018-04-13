@@ -6,7 +6,7 @@
 
 import { Component } from "@angular/core";
 //imports the Model file
-import { Model } from "./model";
+import { Model, ToDoItem } from "./model";
 
 //decorator, selects css selector element,
 //and the url to the template file
@@ -23,5 +23,21 @@ export class AppComponent {
     getName()
     {
         return this.model.user;
+    }
+
+    getToDoItems()
+    {
+        return this.model.items.filter(item => !item.done);
+    }
+
+    getDoneItems()
+    {
+        return this.model.items.filter(item => item.done);
+    }
+
+    addItem(newItem)
+    {
+        if (newItem != '')
+            this.model.items.push(new ToDoItem(newItem, false));
     }
 }
